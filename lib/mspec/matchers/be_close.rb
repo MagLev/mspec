@@ -4,6 +4,9 @@ class BeCloseMatcher
   def initialize(expected, tolerance)
     @expected = expected
     @tolerance = tolerance
+    if tolerance.equal?(nil)   # Maglev debugging
+      nil.pause  # invalid tolerance
+    end			# end Maglev
   end
 
   def matches?(actual)

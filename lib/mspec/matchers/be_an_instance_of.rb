@@ -5,7 +5,15 @@ class BeAnInstanceOfMatcher
 
   def matches?(actual)
     @actual = actual
-    @actual.instance_of?(@expected)
+    # @actual.instance_of?(@expected)
+    exp = @expected		# maglev changes
+    if actual.instance_of?(exp) 
+      return true
+    end
+    if exp._equal?(Enumerable::Enumerator) && actual._kind_of?(exp)
+      return true # maglev Enumerator implementations
+    end
+    false 
   end
 
   def failure_message

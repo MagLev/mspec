@@ -117,11 +117,14 @@ module Mock
   end
 
   def self.verify_call(obj, sym, *args, &block)
-    compare = *args
-    if (behaves_like_ruby_1_9 = *[])
-      compare = compare.first if compare.length <= 1
-    end
+    compare = args  # Maglev, was   compare = *args
+# Maglev, we are not 1.9 but this is activating somehow
+#    if (behaves_like_ruby_1_9 = *[])
+#      compare = compare.first if compare.length <= 1
+#    end
 
+    pxas = []
+    passes = []
     key = replaced_key obj, sym
     [mocks, stubs].each do |proxies|
       proxies[key].each do |proxy|
@@ -131,8 +134,11 @@ module Mock
         when :no_args
           compare.nil?
         else
-          proxy.arguments == compare
+          aarg = proxy.arguments
+          pxas << aarg
+          aarg == compare
         end
+        passes << pass
 
         if proxy.yielding?
           if block

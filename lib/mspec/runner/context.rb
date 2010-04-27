@@ -198,6 +198,9 @@ class ContextState
       if protect "before :all", pre(:all)
         @examples.each do |state|
           @state  = state
+          if DEBUG_SPEC_VERBOSE         # Maglev
+            puts ' , starting:' << state.it
+          end				# end Maglev
           example = state.example
           MSpec.actions :before, state
 

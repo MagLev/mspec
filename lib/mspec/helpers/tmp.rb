@@ -11,6 +11,7 @@ at_exit do
   begin
     Dir.delete SPEC_TEMP_DIR if File.directory? SPEC_TEMP_DIR
   rescue SystemCallError
+    STDERR.puts "\nfor directory #{SPEC_TEMP_DIR}"  # maglev patch
     STDERR.puts <<-EOM
 
 -----------------------------------------------------

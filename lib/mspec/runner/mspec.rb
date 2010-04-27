@@ -68,8 +68,14 @@ module MSpec
       @env.instance_eval(&block)
       return true
     rescue SystemExit
+      if DEBUG_SPEC
+        self.pause # Maglev  , unexpected SystemExit
+      end
       raise
     rescue Exception => exc
+      if DEBUG_SPEC
+        self.pause # Maglev
+      end
       register_exit 1
       actions :exception, ExceptionState.new(current && current.state, location, exc)
       return false
@@ -345,4 +351,15 @@ module MSpec
     file = tags_file
     File.delete file if File.exists? file
   end
+
+  def self.runonespec(file)     # Maglev addition
+    formatter = DottedFormatter.new;  formatter.register
+    @env = Object.new
+    @env.extend MSpec
+    store :file, file
+    actions :load
+    protect("loading #{file}") { Kernel.load file }
+    actions :unload
+  end                   # end Maglev
+
 end
