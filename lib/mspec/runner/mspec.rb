@@ -3,6 +3,13 @@ require 'mspec/runner/exception'
 require 'mspec/runner/tag'
 require 'fileutils'
 
+unless defined?(DEBUG_SPEC)
+  DEBUG_SPEC = false
+end
+unless defined?DEBUG_SPEC_VERBOSE)
+  DEBUG_SPEC_VERBOSE = false
+end
+
 module MSpec
 
   @exit    = nil
