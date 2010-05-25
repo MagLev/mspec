@@ -13,12 +13,10 @@ at_exit do
   rescue SystemCallError
     STDERR.puts "\nfor directory #{SPEC_TEMP_DIR}"  # maglev patch
     STDERR.puts <<-EOM
-
 -----------------------------------------------------
 The rubyspec temp directory is not empty. Ensure that
 all specs are cleaning up temporary files.
 -----------------------------------------------------
-
     EOM
   rescue Object => e
     STDERR.puts "failed to remove spec temp directory"
