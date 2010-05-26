@@ -50,7 +50,7 @@ class RaiseErrorMatcher
 	  # return false if @message !~ @actual.message
 	  actual_message = @actual.message  # Maglev
 	  msg = @message
-	  if @message !~ @actual.message
+	  if @message =~ @actual.message
             res = true
 	  elsif DEBUG_SPEC
 	    nil.pause # Maglev , message text does not match regex
