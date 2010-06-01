@@ -4,6 +4,8 @@ require 'mspec/mocks'
 require 'mspec/runner'
 require 'mspec/guards'
 require 'mspec/helpers'
+require 'mspec/helpers'
+require 'mspec/utils/script.rb'
 
 # If the implementation on which the specs are run cannot
 # load pp from the standard library, add a pp.rb file that
