@@ -112,7 +112,9 @@ class Object
     Dir.chdir(working_dir) do
       body = "-e #{code.inspect}" if code and not File.exists?(code)
       cmd = [RUBY_EXE, ENV['RUBY_FLAGS'], opts[:options], body, opts[:args]]
-      `#{cmd.compact.join(' ')}`
+      full_cmd = cmd.compact.join(' ') # 
+      #  puts "ruby_exe: #{full_cmd}"  # uncomment for maglev debugging
+      `#{full_cmd}`		       #
     end
   end
 
