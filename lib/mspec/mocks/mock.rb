@@ -119,12 +119,11 @@ module Mock
   def self.verify_call(obj, sym, *args, &block)
     compare = args  # Maglev, was   compare = *args
 # Maglev, we are not 1.9 but this is activating somehow
-#    if (behaves_like_ruby_1_9 = *[])
-#      compare = compare.first if compare.length <= 1
-#    end
+#   behaves_like_ruby_1_9 = *[]
+#   if (behaves_like_ruby_1_9)
+#     compare = compare.first if compare.length <= 1
+#   end
 
-    pxas = []
-    passes = []
     key = replaced_key obj, sym
     [mocks, stubs].each do |proxies|
       proxies[key].each do |proxy|
