@@ -124,6 +124,8 @@ module Mock
 #     compare = compare.first if compare.length <= 1
 #   end
 
+    pxas = []  # maglev debugging
+    passes = []
     key = replaced_key obj, sym
     [mocks, stubs].each do |proxies|
       proxies[key].each do |proxy|
@@ -134,10 +136,10 @@ module Mock
           compare.nil?
         else
           aarg = proxy.arguments
-          pxas << aarg
+          pxas << aarg  # maglev debugging
           aarg == compare
         end
-        passes << pass
+        passes << pass  # maglev debugging
 
         if proxy.yielding?
           if block
