@@ -2,7 +2,9 @@ class RespondToMatcher
   def initialize(expected)
     @expected = expected
   end
-
+  def does_not_match(actual)
+    self.matches?(actual).not
+  end
   def matches?(actual)
     @actual = actual
     @actual.respond_to?(@expected)

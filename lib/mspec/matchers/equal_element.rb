@@ -6,6 +6,9 @@ class EqualElementMatcher
     @options = options
   end
  
+  def does_not_match(actual)
+    self.matches?(actual).not
+  end
   def matches?(actual)
     @actual = actual
     

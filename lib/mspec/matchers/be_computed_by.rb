@@ -4,6 +4,9 @@ class BeComputedByMatcher
     @args = args
   end
 
+  def does_not_match(actual)
+    self.matches?(actual).not
+  end
   def matches?(array)
     array.each do |line|
       @receiver = line.shift

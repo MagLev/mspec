@@ -11,6 +11,9 @@ class VariableMatcher
     @variable = convert_name(variable)
   end
 
+  def does_not_match(actual)
+    self.matches?(actual).not
+  end
   def matches?(object)
     @object = object
     @object.send(self.class.variables_method).include? @variable

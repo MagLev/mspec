@@ -22,6 +22,9 @@ class OutputToFDMatcher
     end
   end
 
+  def does_not_match(actual)
+    self.matches?(actual).not
+  end
   def matches?(block)
     old_to = @to.dup
     out = File.open(tmp("mspec_output_to_#{$$}_#{Time.now.to_i}"), 'w+')

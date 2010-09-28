@@ -3,6 +3,10 @@ class BeAnInstanceOfMatcher
     @expected = expected
   end
 
+  def does_not_match(actual)
+    self.matches?(actual).not
+  end
+
   def matches?(actual)
     @actual = actual
     # @actual.instance_of?(@expected)

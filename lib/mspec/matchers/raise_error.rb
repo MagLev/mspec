@@ -5,6 +5,32 @@ class RaiseErrorMatcher
     @block = block
   end
 
+  def does_not_match(proc)
+    # heavily modified for Maglev interactive execution of specs
+    begin
+      proc.call
+      res = true # no exception raised
+    rescue Exception => @actual
+      # return false unless @exception === @actual   # original code
+      expected_exception = @exception   # Maglev 
+      actual_exception = @actual
+      if expected_exception === actual_exception
+        if DEBUG_SPEC
+          nil.pause # Maglev , exception kind mismatch 
+        end
+        res = false
+      else
+	res = true
+      end				# end Maglev
+      if res.equal?(nil)
+        nil.pause # Maglev, logic error in this method
+      end 
+      # don't use return from block to allow
+      # returns from spec exceptions during Kernel.sprintf C prim callback to ruby
+    end
+    res
+  end
+
   def matches?(proc) # [
     # heavily modified for Maglev interactive execution of specs
     res = nil

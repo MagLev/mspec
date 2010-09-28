@@ -1,6 +1,9 @@
 require 'mspec/matchers/method'
 
 class HavePrivateInstanceMethodMatcher < MethodMatcher
+  def does_not_match(actual)
+    self.matches?(actual).not
+  end
   def matches?(mod)
     @mod = mod
     mod.private_instance_methods(@include_super).include? @method

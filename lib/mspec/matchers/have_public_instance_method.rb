@@ -1,6 +1,9 @@
 require 'mspec/matchers/method'
 
 class HavePublicInstanceMethodMatcher < MethodMatcher
+  def does_not_match(actual)
+    self.matches?(actual).not
+  end
   def matches?(mod)
     @mod = mod
     mod.public_instance_methods(@include_super).include? @method

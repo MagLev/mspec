@@ -5,6 +5,9 @@ class EqualUtf16Matcher
     @expected = Array(expected).map { |x| encode x, "binary" }
   end
 
+  def does_not_match(actual)
+    self.matches?(actual).not
+  end
   def matches?(actual)
     @actual = Array(actual).map { |x| encode x, "binary" }
     @actual == @expected || @actual == expected_swapped

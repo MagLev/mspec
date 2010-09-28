@@ -7,6 +7,9 @@ class HaveDataMatcher
     @mode = mode
   end
 
+  def does_not_match(actual)
+    self.matches?(actual).not
+  end
   def matches?(name)
     @name = name
 

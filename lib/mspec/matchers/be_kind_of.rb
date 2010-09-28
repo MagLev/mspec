@@ -3,6 +3,9 @@ class BeKindOfMatcher
     @expected = expected
   end
 
+  def does_not_match(actual)
+    self.matches?(actual).not
+  end
   def matches?(actual)
     @actual = actual
     @actual.is_a?(@expected)

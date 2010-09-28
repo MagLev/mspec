@@ -16,7 +16,7 @@ class Object
     MSpec.expectation
     MSpec.actions :expectation, MSpec.current.state
     unless matcher.equal?(NO_MATCHER_GIVEN)
-      if matcher.matches?(self)
+      unless matcher.does_not_match(self)
         SpecExpectation.fail_with(*matcher.negative_failure_message)
       end
     else

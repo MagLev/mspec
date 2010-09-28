@@ -5,6 +5,9 @@ class ComplainMatcher
     @complaint = complaint
   end
 
+  def does_not_match(actual)
+    self.matches?(actual).not
+  end
   def matches?(proc)
     @saved_err = $stderr
     @stderr = $stderr = IOStub.new

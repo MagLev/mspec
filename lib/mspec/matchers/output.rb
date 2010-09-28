@@ -6,6 +6,9 @@ class OutputMatcher
     @err = stderr
   end
 
+  def does_not_match(actual)
+    self.matches?(actual).not
+  end
   def matches?(proc)
     @saved_out = $stdout
     @saved_err = $stderr
