@@ -1,6 +1,8 @@
 require 'mspec/utils/version'
 require 'mspec/guards/guard'
 
+# maglev NOTE   nested version guard blocks do not work
+
 class VersionGuard < SpecGuard
   def initialize(version)
     case version
