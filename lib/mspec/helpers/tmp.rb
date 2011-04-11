@@ -3,7 +3,12 @@
 # should clean up any temporary files created so that the temp
 # directory is empty when the process exits.
 
-SPEC_TEMP_DIR = "#{File.expand_path(Dir.pwd)}/rubyspec_temp"
+gsdir = ENV['GEMSTONE']
+if gsdir
+  SPEC_TEMP_DIR = "#{gsdir}/data/rubyspec_temp"
+else
+  SPEC_TEMP_DIR = "#{File.expand_path(Dir.pwd)}/rubyspec_temp"
+end
 
 SPEC_TEMP_UNIQUIFIER = "0"
 

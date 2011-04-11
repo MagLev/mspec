@@ -3,7 +3,12 @@ require 'mspec/helpers/tmp'
 
 describe Object, "#tmp" do
   before :all do
-    @dir = "#{File.expand_path(Dir.pwd)}/rubyspec_temp"
+    gsdir = ENV['GEMSTONE']
+    if gsdir
+      @dir = "#{gsdir}/data/rubyspec_temp"
+    else
+      @dir = "#{File.expand_path(Dir.pwd)}/rubyspec_temp"
+    end
   end
 
   it "returns a name relative to the current working directory" do
